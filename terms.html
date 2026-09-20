@@ -1,19 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <<meta name="google-site-verification" content="google9b4dae6c098a41dc.html" />
-  <title>Terms of Service - ContractorNetCalc</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RemotePay Hub — Global Contractor Take-Home & Fee Calculator</title>
+  <meta name="description" content="Calculate your true take-home earnings as a remote contractor after international transfer fees, platform spreads, and estimated taxes." />
+  
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="9b4dae6c098a41dc" />
+
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    input[type=range] { accent-color: #4f46e5; }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 p-6 max-w-3xl mx-auto leading-relaxed">
-  <a href="index.html" class="text-blue-600 text-sm font-semibold hover:underline">← Back to Calculator</a>
-  <h1 class="text-3xl font-extrabold text-slate-900 mt-4 mb-4">Terms of Service</h1>
+<body class="bg-[#0b0f19] text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
-  <h2 class="text-xl font-bold mt-6 mb-2">1. Educational & Estimative Use Only</h2>
-  <p class="mb-4">The calculators and articles provided on ContractorNetCalc are for informational and general educational purposes only. They do not constitute formal legal, accounting, financial, or tax advice.</p>
+  <!-- Glow Background Effect -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-indigo-600/20 blur-[130px] rounded-full"></div>
+    <div class="absolute top-96 -left-20 w-[400px] h-[300px] bg-emerald-500/10 blur-[120px] rounded-full"></div>
+  </div>
 
-  <h2 class="text-xl font-bold mt-6 mb-2">2. Accuracy of Information</h2>
-  <p class="mb-4">While we strive to keep transfer rates and platform fee logic up to date, payment platform fees and national tax regulations change frequently. Always consult a certified tax professional or your payment provider directly for precise financial filings.</p>
+  <!-- Header -->
+  <header class="border-b border-slate-800/80 bg-[#0b0f19]/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-emerald-400 flex items-center justify-center text-xl shadow-lg shadow-indigo-500/20">
+          💸
+        </div>
+        <div>
+          <span class="font-extrabold text-lg text-white tracking-tight">RemotePay<span class="text-indigo-400">Hub</span></span>
+          <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider bg-indigo-500/20 text-indigo-300 rounded-full border border-indigo-500/30">Free Tool</span>
+        </div>
+      </div>
+      <nav class="text-xs sm:text-sm font-medium text-slate-400 space-x-4 sm:space-x-6">
+        <a href="#calculator" class="hover:text-white transition">Calculator</a>
+        <a href="#guide" class="hover:text-white transition">Fee Guide</a>
+        <a href="privacy.html" class="hover:text-white transition">Privacy</a>
+        <a href="terms.html" class="hover:text-white transition">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Top Ad Slot -->
+  <aside class="max-w-4xl mx-auto w-full my-4 px-4">
+    <div class="p-3 bg-slate-900/60 border border-dashed border-slate-700 rounded-xl text-center text-xs text-slate-500">
+      <!-- Google AdSense Responsive Leaderboard Unit -->
+      Responsive Ad Placement (Header)
+    </div>
+  </aside>
+
+  <!-- Hero Headline -->
+  <section class="max-w-4xl mx-auto px-4 pt-6 pb-4 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-700 bg-slate-800/60 text-xs text-emerald-400 font-semibold mb-3">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Updated 2026 Platform Fee Formulas
+    </div>
+    <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+      Stop guessing your <span class="bg-gradient-to-r from-indigo-400 via-sky-300 to-emerald-400 bg-clip-text text-transparent">real take-home pay</span>.
+    </h1>
+    <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-xl mx-auto">
+      Calculate actual net earnings after hidden exchange spreads, withdrawal fees, and local tax reserves.
+    </p>
+  </section>
+
+  <!-- Main Calculator Card Grid -->
+  <main class="max-w-6xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start" id="calculator">
+
+    <!-- Inputs Column (7 Cols) -->
+    <section class="lg:col-span-7 bg-slate-900/90 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-sm">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+          <span>⚙️</span> Your Contract Parameters
+        </h2>
+        <span class="text-xs text-slate-400">100% Private (Runs locally)</span>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Monthly Gross Revenue -->
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <label for="grossRevenue" class="text-sm font-semibold text-slate-300">Monthly Gross Client Invoicing</label>
+            <span id="grossLabel" class="text-xl font-extrabold text-emerald-400 font-mono">$4,000</span>
+          </div>
+          <input type="range" id="grossRevenue" min="500" max="15000" step="100" value="4000" class="w-full h-2.5 bg-slate-800 rounded-lg cursor-pointer" />
+          
+          <!-- Quick Presets -->
+          <div class="flex gap-2 mt-2">
+            <button type="button" class="preset-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 transition" data-val="1500">$1,500</button>
+            <button type="button" class="preset-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 transition" data-val="3000">$3,000</button>
+            <button type="button" class="preset-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 transition" data-val="5000">$5,000</button>
+            <button type="button" class="preset-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 transition" data-val="8000">$8,000</button>
+            <button type="button" class="preset-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 transition" data-val="12000">$12,000</button>
+          </div>
+        </div>
+
+        <!-- Payout Method & Tax Reserve -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="payoutMethod" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Payout Method</label>
+            <select id="payoutMethod" class="w-full p-3 border border-slate-700 rounded-xl text-sm bg-slate-800/90 text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+              <option value="wise">Wise (Mid-Market Rate + ~0.5% fee)</option>
+              <option value="payoneer">Payoneer (~2% FX spread + $3 fee)</option>
+              <option value="swift">International SWIFT ($35 fee + 2.5% FX)</option>
+              <option value="crypto">USDT / Crypto P2P (~1% slippage)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="taxRate" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Local Tax Reserve</label>
+            <select id="taxRate" class="w-full p-3 border border-slate-700 rounded-xl text-sm bg-slate-800/90 text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+              <option value="0">0% (Special Export Exemption / Tax Free)</option>
+              <option value="1">1% (Presumptive IT Export Tax)</option>
+              <option value="5">5% (Flat Simplified Tax Tier)</option>
+              <option value="15" selected>15% (Standard Self-Employed Bracket)</option>
+              <option value="25">25% (Higher Progressive Tier)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Monthly Expenses -->
+        <div>
+          <label for="overhead" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Monthly Business Overhead ($ USD)</label>
+          <input type="number" id="overhead" value="150" class="w-full p-3 border border-slate-700 rounded-xl text-sm bg-slate-800/90 text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="e.g., Software, Co-working, High-Speed Fiber" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Results Display Column (5 Cols) -->
+    <aside class="lg:col-span-5 space-y-6">
+      <div class="bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700/80 p-6 sm:p-8 rounded-3xl shadow-2xl relative overflow-hidden">
+        
+        <div class="flex items-center justify-between">
+          <span class="text-xs uppercase tracking-widest font-extrabold text-indigo-400">Net Estimated Take-Home</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30" id="retentionBadge">80.8% Retained</span>
+        </div>
+
+        <div class="text-4xl sm:text-5xl font-black text-white mt-3 font-mono tracking-tight" id="netIncomeDisplay">
+          $3,230.00
+        </div>
+        <p class="text-xs text-slate-400 mt-1">What actually reaches your personal bank account</p>
+
+        <!-- Dynamic Visual Ratio Bar -->
+        <div class="mt-6 mb-2">
+          <div class="text-xs font-semibold text-slate-400 mb-1 flex justify-between">
+            <span>Deduction Breakdown</span>
+          </div>
+          <div class="w-full h-3 rounded-full bg-slate-800 overflow-hidden flex">
+            <div id="barNet" class="bg-emerald-400 h-full transition-all duration-300" style="width: 80.8%;"></div>
+            <div id="barTax" class="bg-amber-400 h-full transition-all duration-300" style="width: 14.4%;"></div>
+            <div id="barFee" class="bg-rose-400 h-full transition-all duration-300" style="width: 4.8%;"></div>
+          </div>
+          <div class="flex justify-between text-[10px] text-slate-400 mt-1.5 font-medium">
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Take-Home</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Tax</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-400"></span> Fees/Overhead</span>
+          </div>
+        </div>
+
+        <hr class="border-slate-700/60 my-5" />
+
+        <!-- Line Item Breakdown -->
+        <div class="space-y-3 text-sm">
+          <div class="flex justify-between items-center text-slate-300">
+            <span class="flex items-center gap-1.5 text-xs text-slate-400">💳 Platform & FX Fees:</span>
+            <span class="font-mono font-bold text-rose-400" id="feeDisplay">-$23.00</span>
+          </div>
+          <div class="flex justify-between items-center text-slate-300">
+            <span class="flex items-center gap-1.5 text-xs text-slate-400">🏛️ Local Tax Reserve:</span>
+            <span class="font-mono font-bold text-amber-400" id="taxDisplay">-$577.50</span>
+          </div>
+          <div class="flex justify-between items-center text-slate-300">
+            <span class="flex items-center gap-1.5 text-xs text-slate-400">💼 Workspace Overhead:</span>
+            <span class="font-mono font-bold text-slate-400" id="overheadDisplay">-$150.00</span>
+          </div>
+        </div>
+
+        <!-- Copy Action Button -->
+        <button id="copyBtn" class="mt-6 w-full py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-98 text-white font-bold text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30">
+          <span>📋</span> Copy My Net Breakdown
+        </button>
+        <div id="copyToast" class="text-center text-xs text-emerald-400 font-semibold mt-2 hidden">Copied to clipboard!</div>
+      </div>
+
+      <!-- Sticky Sidebar Ad Slot -->
+      <div class="p-4 bg-slate-900/60 border border-dashed border-slate-700 rounded-2xl text-center text-xs text-slate-500">
+        Responsive Sticky Display Ad Unit
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Editorial Section: Essential for AdSense Approval -->
+  <article class="max-w-4xl mx-auto px-4 py-12" id="guide">
+    <div class="bg-slate-900/80 border border-slate-800 p-8 rounded-3xl space-y-6 text-slate-300 leading-relaxed text-sm sm:text-base">
+      <h2 class="text-2xl font-bold text-white">How Cross-Border Deductions Impact Contractor Revenue</h2>
+      <p>
+        When pricing freelance software engineering, creative design, or consulting contracts for US and European clients, remote professionals frequently underestimate the cumulative impact of payment gateways and exchange rate spreads.
+      </p>
+
+      <h3 class="text-lg font-bold text-white">1. Fixed Fees vs. Mid-Market Spreads</h3>
+      <p>
+        Many international transfer services advertise low transaction costs while imposing a 1.5% to 3.0% margin above the real mid-market exchange rate. On a $4,000 monthly invoice, a 2.5% spread silently reduces your earnings by $100 every single month ($1,200 annually).
+      </p>
+
+      <h3 class="text-lg font-bold text-white">2. Disciplined Tax Reserve Allocation</h3>
+      <p>
+        Because international employers do not withhold tax at source, independent contractors bear full responsibility for local compliance. Transferring your estimated liability into a dedicated reserve account upon payment receipt prevents year-end cash flow shocks.
+      </p>
+    </div>
+  </article>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800/80 bg-[#0b0f19] py-8 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex space-x-6">
+        <a href="privacy.html" class="hover:text-slate-300 transition">Privacy Policy</a>
+        <a href="terms.html" class="hover:text-slate-300 transition">Terms of Service</a>
+      </div>
+      <div>
+        © 2026 RemotePay Hub. Informational estimates only.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Reactive Script -->
+  <script>
+    const grossSlider = document.getElementById('grossRevenue');
+    const grossLabel = document.getElementById('grossLabel');
+    const payoutSelect = document.getElementById('payoutMethod');
+    const taxSelect = document.getElementById('taxRate');
+    const overheadInput = document.getElementById('overhead');
+
+    const netDisplay = document.getElementById('netIncomeDisplay');
+    const feeDisplay = document.getElementById('feeDisplay');
+    const taxDisplay = document.getElementById('taxDisplay');
+    const overheadDisplay = document.getElementById('overheadDisplay');
+    const retentionBadge = document.getElementById('retentionBadge');
+
+    const barNet = document.getElementById('barNet');
+    const barTax = document.getElementById('barTax');
+    const barFee = document.getElementById('barFee');
+
+    const copyBtn = document.getElementById('copyBtn');
+    const copyToast = document.getElementById('copyToast');
+
+    function calculateNet() {
+      const gross = parseFloat(grossSlider.value) || 0;
+      const overhead = parseFloat(overheadInput.value) || 0;
+      const taxRate = (parseFloat(taxSelect.value) || 0) / 100;
+      const method = payoutSelect.value;
+
+      grossLabel.textContent = `$${gross.toLocaleString()}`;
+      overheadDisplay.textContent = `-$${overhead.toFixed(2)}`;
+
+      let transferFee = 0;
+      if (method === 'wise') {
+        transferFee = (gross * 0.005) + 3;
+      } else if (method === 'payoneer') {
+        transferFee = (gross * 0.02) + 3;
+      } else if (method === 'swift') {
+        transferFee = (gross * 0.025) + 35;
+      } else if (method === 'crypto') {
+        transferFee = gross * 0.01;
+      }
+
+      const taxableBase = Math.max(0, gross - overhead);
+      const taxWithheld = taxableBase * taxRate;
+      const netTakeHome = Math.max(0, gross - transferFee - taxWithheld - overhead);
+      const retention = gross > 0 ? (netTakeHome / gross) * 100 : 0;
+      const taxRatio = gross > 0 ? (taxWithheld / gross) * 100 : 0;
+      const feeRatio = gross > 0 ? ((transferFee + overhead) / gross) * 100 : 0;
+
+      netDisplay.textContent = `$${netTakeHome.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      feeDisplay.textContent = `-$${transferFee.toFixed(2)}`;
+      taxDisplay.textContent = `-$${taxWithheld.toFixed(2)}`;
+      retentionBadge.textContent = `${retention.toFixed(1)}% Retained`;
+
+      // Update Visual Ratio Bar
+      barNet.style.width = `${retention}%`;
+      barTax.style.width = `${taxRatio}%`;
+      barFee.style.width = `${feeRatio}%`;
+    }
+
+    // Preset buttons
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const val = (e.target).getAttribute('data-val');
+        if (val) {
+          grossSlider.value = val;
+          calculateNet();
+        }
+      });
+    });
+
+    // Copy Breakdown summary
+    copyBtn.addEventListener('click', () => {
+      const text = `RemotePay Hub Breakdown:\n• Gross Billing: ${grossLabel.textContent}\n• Transfer Fees: ${feeDisplay.textContent}\n• Tax Reserve: ${taxDisplay.textContent}\n• Net Take-Home: ${netDisplay.textContent}\nCalculated at RemotePay Hub`;
+      navigator.clipboard.writeText(text).then(() => {
+        copyToast.classList.remove('hidden');
+        setTimeout(() => copyToast.classList.add('hidden'), 2500);
+      });
+    });
+
+    [grossSlider, payoutSelect, taxSelect, overheadInput].forEach(el => {
+      el.addEventListener('input', calculateNet);
+    });
+
+    calculateNet();
+  </script>
 </body>
 </html>
